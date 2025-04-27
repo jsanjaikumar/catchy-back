@@ -139,7 +139,14 @@ router.get("/assignments", verifyToken, async (req, res) => {
   try {
     const foods = await Food.find(
       {},
-      { title: 1, foodType: 1, address: 1, assignments: 1 }
+      {
+        title: 1,
+        foodType: 1,
+        address: 1,
+        assignments: 1,
+        firstName: 1,
+        phone: 1,
+      }
     );
 
     const allAssignments = [];
@@ -151,6 +158,8 @@ router.get("/assignments", verifyToken, async (req, res) => {
           foodTitle: food.title,
           foodAddress: food.address,
           foodType: food.foodType,
+          donorName: food.firstName,
+          donorContact: food.phone,
           assignmentId: assignment._id,
           servings: assignment.servings,
           email: assignment.email,
